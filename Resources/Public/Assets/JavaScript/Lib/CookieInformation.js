@@ -100,6 +100,7 @@ class CookieInformation {
         const groups = this.data?.groups || {};
         const cols = [
             ['name', labels.name || 'Cookie'],
+            ['type', labels.type || 'Type'],
             ['provider', labels.provider || 'Provider'],
             ['purpose', labels.purpose || 'Purpose'],
             ['lifetime', labels.lifetime || 'Lifetime'],
@@ -119,6 +120,7 @@ class CookieInformation {
                 const serviceTitle = esc(service?.title);
                 html += `<div class="${CB_PREFIX}cookie-info-service">`;
                 html += `<h4 class="${CB_PREFIX}cookie-info-service-title">${serviceTitle}</h4>`;
+                html += this.buildServiceMeta(service?.service);
                 html += `<div class="${CB_PREFIX}cookie-info-table" role="table" aria-label="${serviceTitle}">`;
                 html += `<div class="${CB_PREFIX}cookie-info-row ${CB_PREFIX}cookie-info-row--head" role="row">`;
                 cols.forEach(([, label]) => {
@@ -138,6 +140,39 @@ class CookieInformation {
         });
 
         return html || `<p class="${CB_PREFIX}cookie-info-empty">${esc(this.data?.displayTexts?.cookie?.description || 'No cookie details available.')}</p>`;
+    }
+
+    /**
+     * Renders the service-level meta information (provider, publisher, data
+     * collected and privacy link) below the service title. Only non-empty
+     * values are shown.
+     *
+     * @param {{provider?: string, publisher?: string, dataCollected?: string, privacyLink?: string}} [service]
+     * @return {string}
+     */
+    buildServiceMeta(service) {
+        if (!service || typeof service !== 'object') {
+            return '';
+        }
+        const esc = (s) => this.escape(s);
+        const rows = [];
+        if (service.publisher) {
+            rows.push(`<span class="${CB_PREFIX}cookie-info-meta-item">${esc(service.publisher)}</span>`);
+        }
+        if (service.provider) {
+            rows.push(`<span class="${CB_PREFIX}cookie-info-meta-item">${esc(service.provider)}</span>`);
+        }
+        if (service.dataCollected) {
+            rows.push(`<span class="${CB_PREFIX}cookie-info-meta-item">${esc(service.dataCollected)}</span>`);
+        }
+        if (service.privacyLink) {
+            const href = esc(service.privacyLink);
+            rows.push(`<a class="${CB_PREFIX}cookie-info-meta-link" href="${href}" target="_blank" rel="noopener noreferrer">${href}</a>`);
+        }
+        if (rows.length === 0) {
+            return '';
+        }
+        return `<div class="${CB_PREFIX}cookie-info-meta">${rows.join('')}</div>`;
     }
 
     attachEventListeners() {

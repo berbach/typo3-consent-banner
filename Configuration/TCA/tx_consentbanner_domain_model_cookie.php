@@ -34,7 +34,9 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-                cookie_name, cookie_provider,
+                cookie_name, cookie_type,
+                --linebreak--,
+                cookie_provider,
                 --linebreak--,
                 cookie_purpose,
                 --linebreak--,
@@ -94,6 +96,24 @@ return [
                 'size' => 50,
                 'eval' => 'trim',
                 'required' => true,
+            ],
+        ],
+        'cookie_type' => [
+            'exclude' => true,
+            'label' => $ll . 'field.cookie_type',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim',
+                'valuePicker' => [
+                    'items' => [
+                        ['Cookie', 'Cookie'],
+                        ['Session-Cookie', 'Session-Cookie'],
+                        ['LocalStorage', 'LocalStorage'],
+                        ['SessionStorage', 'SessionStorage'],
+                        ['IndexedDB', 'IndexedDB'],
+                    ],
+                ],
             ],
         ],
         'cookie_provider' => [

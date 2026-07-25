@@ -160,6 +160,57 @@ input:not(:valid) + button.close {
     visibility: hidden;
 }
 
+/* Service-Autocomplete: Vorschlagsliste unter dem Input-Feld.
+   Nutzt TYPO3-Backend-CSS-Variablen, damit sie sich in Light/Dark nahtlos
+   ins aktuelle Theme (vergleichbar zum nativen Suggest-Wizard) einfuegt. */
+.cb-service-suggest {
+    position: absolute;
+    z-index: 1050;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin-top: 2px;
+    background-color: var(--typo3-component-bg, #fff);
+    color: var(--typo3-component-color, inherit);
+    border: 1px solid var(--typo3-component-border-color, #bbb);
+    border-radius: var(--typo3-component-border-radius, 4px);
+    box-shadow: var(--typo3-component-box-shadow, 0 2px 8px rgba(0, 0, 0, .15));
+    max-height: 320px;
+    overflow-y: auto;
+}
+.cb-service-suggest[hidden] {
+    display: none;
+}
+.cb-service-suggest-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    width: 100%;
+    padding: 6px 12px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid var(--typo3-component-border-color, #eee);
+}
+.cb-service-suggest-item:last-child {
+    border-bottom: 0;
+}
+.cb-service-suggest-item:hover,
+.cb-service-suggest-item.is-active {
+    background-color: var(--typo3-list-item-hover-bg, var(--typo3-state-default-hover-bg, rgba(0, 0, 0, .06)));
+    color: var(--typo3-list-item-hover-color, inherit);
+}
+.cb-service-suggest-title {
+    font-weight: 600;
+}
+.cb-service-suggest-meta {
+    font-size: .85em;
+    opacity: .75;
+}
+
 /* Banner-Modul: Gruppen-Uebersicht (Consent groups) */
 .bb-cb--components {
     display: flex;

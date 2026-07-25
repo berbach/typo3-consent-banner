@@ -278,6 +278,29 @@
             <trans-unit id="field.cookies">
                 <source>Cookies</source>
             </trans-unit>
+
+            <trans-unit id="field.service_name">
+                <source>Service</source>
+            </trans-unit>
+            <trans-unit id="field.service_name.description">
+                <source>Search a known service (e.g. YouTube, Google Analytics). Selecting a suggestion pre-fills the fields below and the cookie list. All fields stay editable afterwards.</source>
+            </trans-unit>
+            <trans-unit id="field.service_provider">
+                <source>Provider domains</source>
+            </trans-unit>
+            <trans-unit id="field.service_privacy_link">
+                <source>Privacy policy link</source>
+            </trans-unit>
+            <trans-unit id="field.service_publisher">
+                <source>Publisher</source>
+            </trans-unit>
+            <trans-unit id="field.service_data_collected">
+                <source>Data collected</source>
+            </trans-unit>
+            <trans-unit id="field.cookie_type">
+                <source>Type</source>
+            </trans-unit>
+
             <trans-unit id="field.cookie_name">
                 <source>Cookie name (_ga)</source>
             </trans-unit>

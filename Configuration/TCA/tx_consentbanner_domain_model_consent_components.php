@@ -42,7 +42,8 @@ return [
                 --div--;LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:tab.placeholder,
                     --palette--;;placeholder,
                 --div--;LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:tab.cookie_information,
-                    cookies,
+                    --palette--;;service,
+                    service_cookies,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
                     --palette--;;language,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
@@ -96,6 +97,17 @@ return [
                     accepted_script,
                 --linebreak--,
                     rejected_script
+            ',
+        ],
+        'service' => [
+            'showitem' => '
+                    service_name,
+                --linebreak--,
+                    service_provider, service_publisher,
+                --linebreak--,
+                    service_privacy_link,
+                --linebreak--,
+                    service_data_collected,
             ',
         ],
     ],
@@ -276,7 +288,60 @@ return [
             ]
         ],
 
-        'cookies' => [
+        'service_name' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.service_name',
+            'description' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.service_name.description',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'serviceAutocomplete',
+                'size' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+
+        'service_provider' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.service_provider',
+            'config' => [
+                'type' => 'input',
+                'size' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+
+        'service_privacy_link' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.service_privacy_link',
+            'config' => [
+                'type' => 'link',
+                'size' => 50,
+                'allowedTypes' => ['url', 'page'],
+            ],
+        ],
+
+        'service_publisher' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.service_publisher',
+            'config' => [
+                'type' => 'input',
+                'size' => 50,
+                'eval' => 'trim',
+            ],
+        ],
+
+        'service_data_collected' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.service_data_collected',
+            'config' => [
+                'type' => 'text',
+                'eval' => 'trim',
+                'cols' => 50,
+                'rows' => 4,
+            ],
+        ],
+
+        'service_cookies' => [
             'exclude' => true,
             'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.cookies',
