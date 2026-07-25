@@ -307,9 +307,6 @@
             <trans-unit id="field.cookie_description">
                 <source>Cookie description</source>
             </trans-unit>
-            <trans-unit id="field.cookie_provider">
-                <source>Cookie provider</source>
-            </trans-unit>
             <trans-unit id="field.cookie_purpose">
                 <source>Cookie purpose</source>
             </trans-unit>

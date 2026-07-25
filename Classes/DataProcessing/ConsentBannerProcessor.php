@@ -214,7 +214,7 @@ class ConsentBannerProcessor implements DataProcessorInterface
     /**
      * Collects the cookies of a component as a plain array for the frontend.
      *
-     * @return array<int, array{name: string, type: string, provider: string, purpose: string, lifetime: string, description: string}>
+     * @return array<int, array{name: string, type: string, purpose: string, lifetime: string, description: string}>
      */
     protected function addCookies(object $component): array
     {
@@ -223,7 +223,6 @@ class ConsentBannerProcessor implements DataProcessorInterface
             $cookies[] = [
                 'name' => $cookie->getCookieName(),
                 'type' => $cookie->getCookieType(),
-                'provider' => $cookie->getCookieProvider(),
                 'purpose' => $cookie->getCookiePurpose(),
                 'lifetime' => $cookie->getCookieLifetime(),
                 'description' => $cookie->getCookieDescription(),

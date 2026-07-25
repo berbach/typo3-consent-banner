@@ -101,7 +101,6 @@ class CookieInformation {
         const cols = [
             ['name', labels.name || 'Cookie'],
             ['type', labels.type || 'Type'],
-            ['provider', labels.provider || 'Provider'],
             ['purpose', labels.purpose || 'Purpose'],
             ['lifetime', labels.lifetime || 'Lifetime'],
             ['description', labels.description || 'Description'],

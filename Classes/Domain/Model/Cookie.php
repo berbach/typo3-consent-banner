@@ -14,7 +14,6 @@ class Cookie extends AbstractEntity
 {
     protected string $cookieName = '';
     protected string $cookieType = '';
-    protected string $cookieProvider = '';
     protected string $cookieDescription = '';
     protected string $cookiePurpose = '';
     protected string $cookieLifetime = '';
@@ -37,16 +36,6 @@ class Cookie extends AbstractEntity
     public function setCookieType(string $cookieType): void
     {
         $this->cookieType = $cookieType;
-    }
-
-    public function getCookieProvider(): string
-    {
-        return $this->cookieProvider;
-    }
-
-    public function setCookieProvider(string $cookieProvider): void
-    {
-        $this->cookieProvider = $cookieProvider;
     }
 
     public function getCookieDescription(): string

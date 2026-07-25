@@ -7,7 +7,6 @@ return [
     'ctrl' => [
         'title' => 'Cookie',
         'label' => 'cookie_name',
-        'label_alt' => 'cookie_provider',
         'sortby' => 'sorting_foreign',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -35,8 +34,6 @@ return [
         '0' => [
             'showitem' => '
                 cookie_name, cookie_type,
-                --linebreak--,
-                cookie_provider,
                 --linebreak--,
                 cookie_purpose,
                 --linebreak--,
@@ -114,15 +111,6 @@ return [
                         ['IndexedDB', 'IndexedDB'],
                     ],
                 ],
-            ],
-        ],
-        'cookie_provider' => [
-            'exclude' => true,
-            'label' => $ll . 'field.cookie_provider',
-            'config' => [
-                'type' => 'input',
-                'size' => 50,
-                'eval' => 'trim',
             ],
         ],
         'cookie_description' => [

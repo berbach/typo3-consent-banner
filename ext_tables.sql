@@ -131,7 +131,6 @@ CREATE TABLE tx_consentbanner_domain_model_cookie
 (
     cookie_name                 varchar(255)         DEFAULT '' NOT NULL,
     cookie_type                 varchar(60)          DEFAULT '' NOT NULL,
-    cookie_provider             varchar(255)         DEFAULT '' NOT NULL,
     cookie_description          text,
     cookie_purpose              text,
     cookie_lifetime             varchar(255)         DEFAULT '' NOT NULL,
