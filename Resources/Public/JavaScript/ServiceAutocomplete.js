@@ -220,12 +220,19 @@ async function applyService(input, config, service) {
   });
 
   // 3) Create + fill the inline cookie rows (native IRRE flow).
+  // Scope to THIS component's inline record wrapper: with several components
+  // expanded at once, the form contains multiple service_cookies inlines, so a
+  // form-wide lookup would target the wrong component. The autocomplete input
+  // sits inside its component's inline record ([data-object-uid]); when editing
+  // a component as the top-level record there is no such wrapper and the whole
+  // form (with its single inline) is the correct scope.
+  const scope = input.closest('[data-object-uid]') || form;
   const cookies = Array.isArray(service.cookies) ? service.cookies : [];
   if (cookies.length === 0) {
     return;
   }
-  const createButton = findInlineCreateButton(form, config.inlineField);
-  const watchRoot = findInlineFieldItem(form, config.inlineField) || form;
+  const createButton = findInlineCreateButton(scope, config.inlineField);
+  const watchRoot = findInlineFieldItem(scope, config.inlineField) || scope;
   if (!createButton) {
     return;
   }
