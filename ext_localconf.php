@@ -37,4 +37,11 @@ call_user_func(static function () {
         'priority' => 40,
         'class' => \Bb\ConsentBanner\Form\Element\ServiceAutocompleteElement::class,
     ];
+
+    // Load the service autocomplete JS/CSS on every backend page so the field
+    // also initializes when it is rendered as a lazily loaded nested inline
+    // record (Banner -> group -> component), where the per-element module
+    // import is not reliably executed.
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][]
+        = \Bb\ConsentBanner\Hook\BackendAssetHook::class . '->registerAssets';
 });
