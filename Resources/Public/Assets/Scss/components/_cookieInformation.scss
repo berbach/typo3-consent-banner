@@ -131,6 +131,7 @@ $cb-label-color: variables.$primaryDarker;
         display: grid;
         grid-template-columns: 1fr;
         gap: unit.bb-calc-rem(2);
+        font-size: unit.bb-calc-rem(16);
     }
 
     &-meta-label {
@@ -197,6 +198,7 @@ $cb-label-color: variables.$primaryDarker;
     &-cell {
         display: block;
         padding: unit.bb-calc-rem(3) 0;
+        font-size: unit.bb-calc-rem(16);
         word-break: break-word;
         overflow-wrap: anywhere;
 
