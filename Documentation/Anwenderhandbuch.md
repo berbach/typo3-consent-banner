@@ -7,7 +7,7 @@ sicheren Umgang mit eigenen Content-Elementen und dem TYPO3-Content-Element **�
 
 > **Hinweis zur Verlässlichkeit der Angaben**
 > Technische Fakten in diesem Dokument (Feldnamen, Klassennamen, Pfade, TypoScript,
-> Frontend-Verhalten) beziehen sich auf **Extension-Version 1.2.7**. Versionsabhängige
+> Frontend-Verhalten) beziehen sich auf **Extension-Version 1.2.8**. Versionsabhängige
 > Stellen sind ausdrücklich gekennzeichnet. Prüfe projektspezifische Werte in eckigen
 > Klammern `[…]` vor Veröffentlichung dieses Handbuchs.
 
@@ -16,7 +16,7 @@ sicheren Umgang mit eigenen Content-Elementen und dem TYPO3-Content-Element **�
 | Platzhalter | Bedeutung | Status |
 |-------------|-----------|--------|
 | `[TYPO3_VERSION]` | Konkrete TYPO3-Version der Zielinstallation | zu prüfen (unterstützt: 13.4–14.3) |
-| `[EXTENSION_VERSION]` | Installierte Extension-Version | bekannt: **1.2.7** |
+| `[EXTENSION_VERSION]` | Installierte Extension-Version | bekannt: **1.2.8** |
 | `[INSTALLATIONSMETHODE]` | Composer / Extension Manager | Extension ist **Composer-basiert** |
 | `[ZIELUMGEBUNG]` | Entwicklung / Test / Produktion | zu ergänzen |
 | `[SITEPACKAGE_ODER_TEMPLATE]` | Verwendetes Sitepackage/Template | zu ergänzen |
@@ -27,7 +27,7 @@ sicheren Umgang mit eigenen Content-Elementen und dem TYPO3-Content-Element **�
 
 ## 1. Voraussetzungen
 
-### 1.1 Versionen (gesichert für Extension 1.2.7)
+### 1.1 Versionen (gesichert für Extension 1.2.8)
 
 | Komponente | Anforderung |
 |-----------|-------------|
@@ -80,7 +80,7 @@ Anschließend das stabile Release installieren:
 composer require bb/consent_banner:^1.2 --prefer-dist
 ```
 
-- `^1.2` installiert das aktuelle stabile Release (Tag `v1.2.7`).
+- `^1.2` installiert das aktuelle stabile Release (Tag `v1.2.8`).
 - `--prefer-dist` lädt ein schlankes Archiv ohne Build-Toolchain (per `.gitattributes`
   ausgeschlossen), sodass nur die für den Betrieb nötigen Dateien installiert werden.
 
@@ -631,5 +631,5 @@ Skripte benötigen eine **Domain-Freigabe** in der CSP (z. B. `googletagmanager.
 
 ---
 
-*Grundlage: Consent Banner 1.2.7 (`bb/consent_banner`), TYPO3 13.4–14.3, PHP 8.3–8.4.
+*Grundlage: Consent Banner 1.2.8 (`bb/consent_banner`), TYPO3 13.4–14.3, PHP 8.3–8.4.
 Ergänzende technische Referenz: `Documentation/Configuration.md`.*
