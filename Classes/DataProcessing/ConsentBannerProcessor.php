@@ -88,7 +88,14 @@ class ConsentBannerProcessor implements DataProcessorInterface
                         'provider'      => !empty($banner->getCookieProviderText()) ? $banner->getCookieProviderText() : $this->getTranslate('cookie_provider_text'),
                         'purpose'       => !empty($banner->getCookiePurposeText()) ? $banner->getCookiePurposeText() : $this->getTranslate('cookie_purpose_text'),
                         'description'   => !empty($banner->getCookieDescriptionText()) ? $banner->getCookieDescriptionText() : $this->getTranslate('cookie_description_text'),
-                    ]
+                    ],
+                    'cookieTableHeading' => $this->getTranslate('cookie_table_heading'),
+                    'serviceMeta' => [
+                        'publisher'     => $this->getTranslate('meta_publisher_label'),
+                        'provider'      => $this->getTranslate('meta_provider_label'),
+                        'dataCollected' => $this->getTranslate('meta_data_collected_label'),
+                        'privacy'       => $this->getTranslate('meta_privacy_label'),
+                    ],
 
                 ],
                 'openerVariant'         => $banner->getPrivacySettingsVariant(), //10 Text link | 20 Button Widget
