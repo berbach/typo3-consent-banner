@@ -6,7 +6,7 @@ Freischaltung eingebetteter Inhalte **ohne Seiten-Reload**.
 
 - **Extension-Key:** `consent_banner`
 - **Composer:** `bb/consent_banner`
-- **Version:** 1.3.0 · **State:** stable
+- **Version:** 1.3.1 · **State:** stable
 - **Autor:** Andreas Schulze, berbach GmbH
 
 ---
@@ -58,7 +58,7 @@ Anschließend installieren:
 composer require bb/consent_banner:^1.3 --prefer-dist
 ```
 
-- `^1.3` installiert das aktuelle stabile Release (getaggt, `v1.3.0`). Composer
+- `^1.3` installiert das aktuelle stabile Release (getaggt, `v1.3.1`). Composer
   bevorzugt Tags vor Dev-Branches; der Default-Branch des Repos ist `prod`.
 - `--prefer-dist` lädt ein schlankes Dist-Archiv statt eines vollständigen Git-Clones;
   Build-Toolchain und Entwicklungsdateien sind per `.gitattributes` (`export-ignore`)
