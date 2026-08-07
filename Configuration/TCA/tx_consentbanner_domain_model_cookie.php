@@ -7,7 +7,6 @@ return [
     'ctrl' => [
         'title' => 'Cookie',
         'label' => 'cookie_name',
-        'label_alt' => 'cookie_provider',
         'sortby' => 'sorting_foreign',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -34,7 +33,7 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-                cookie_name, cookie_provider,
+                cookie_name, cookie_type,
                 --linebreak--,
                 cookie_purpose,
                 --linebreak--,
@@ -96,13 +95,22 @@ return [
                 'required' => true,
             ],
         ],
-        'cookie_provider' => [
+        'cookie_type' => [
             'exclude' => true,
-            'label' => $ll . 'field.cookie_provider',
+            'label' => $ll . 'field.cookie_type',
             'config' => [
                 'type' => 'input',
-                'size' => 50,
+                'size' => 30,
                 'eval' => 'trim',
+                'valuePicker' => [
+                    'items' => [
+                        ['Cookie', 'Cookie'],
+                        ['Session-Cookie', 'Session-Cookie'],
+                        ['LocalStorage', 'LocalStorage'],
+                        ['SessionStorage', 'SessionStorage'],
+                        ['IndexedDB', 'IndexedDB'],
+                    ],
+                ],
             ],
         ],
         'cookie_description' => [

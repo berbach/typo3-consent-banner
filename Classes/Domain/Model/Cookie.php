@@ -13,7 +13,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Cookie extends AbstractEntity
 {
     protected string $cookieName = '';
-    protected string $cookieProvider = '';
+    protected string $cookieType = '';
     protected string $cookieDescription = '';
     protected string $cookiePurpose = '';
     protected string $cookieLifetime = '';
@@ -28,14 +28,14 @@ class Cookie extends AbstractEntity
         $this->cookieName = $cookieName;
     }
 
-    public function getCookieProvider(): string
+    public function getCookieType(): string
     {
-        return $this->cookieProvider;
+        return $this->cookieType;
     }
 
-    public function setCookieProvider(string $cookieProvider): void
+    public function setCookieType(string $cookieType): void
     {
-        $this->cookieProvider = $cookieProvider;
+        $this->cookieType = $cookieType;
     }
 
     public function getCookieDescription(): string

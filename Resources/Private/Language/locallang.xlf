@@ -45,6 +45,22 @@
                 <source>Cookie description</source>
             </trans-unit>
 
+            <trans-unit id="cookie_table_heading">
+                <source>Cookies</source>
+            </trans-unit>
+            <trans-unit id="meta_publisher_label">
+                <source>Publisher</source>
+            </trans-unit>
+            <trans-unit id="meta_provider_label">
+                <source>Domains</source>
+            </trans-unit>
+            <trans-unit id="meta_data_collected_label">
+                <source>Data collected</source>
+            </trans-unit>
+            <trans-unit id="meta_privacy_label">
+                <source>Privacy policy</source>
+            </trans-unit>
+
             <trans-unit id="button_widget_text">
                 <source>Cookie settings change</source>
             </trans-unit>

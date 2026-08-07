@@ -45,6 +45,22 @@
                 <target>Cookie Beschreibung</target>
             </trans-unit>
 
+            <trans-unit id="cookie_table_heading">
+                <target>Cookies</target>
+            </trans-unit>
+            <trans-unit id="meta_publisher_label">
+                <target>Anbieter</target>
+            </trans-unit>
+            <trans-unit id="meta_provider_label">
+                <target>Domains</target>
+            </trans-unit>
+            <trans-unit id="meta_data_collected_label">
+                <target>Erhobene Daten</target>
+            </trans-unit>
+            <trans-unit id="meta_privacy_label">
+                <target>Datenschutz</target>
+            </trans-unit>
+
             <trans-unit id="button_widget_text">
                 <target>Cookie Einstellung ändern</target>
             </trans-unit>

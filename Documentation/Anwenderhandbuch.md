@@ -197,6 +197,35 @@ bzw. der Sprachdatei und können abweichen.*
   Checkbox-Bedienelemente. **Vollständige WCAG-Konformität ist projekt- und
   themeabhängig** und muss geprüft werden (Abschnitt 9).
 
+### 3.7 Cookie-Informationsfenster (Frontend)
+
+Über den Link/Button **„Cookie-Informationen anzeigen"** öffnen Besucher:innen ein Overlay mit
+allen eingesetzten Diensten und deren Cookies – nach Gruppe und Dienst gegliedert. Je Dienst
+werden zuerst die Metadaten (Anbieter, Domains, erhobene Daten, Datenschutz-Link) als
+beschriftete Liste angezeigt, darunter unter der Überschrift **„Cookies"** die Cookie-Tabelle mit
+den Spalten *Name, Type, Purpose, Lifetime, Description*.
+
+Das Fenster ist responsiv aufgebaut:
+
+- **Smartphone:** je Cookie eine gestapelte Karte, Feldbezeichnungen farbig über den Werten.
+- **Tablet:** Metadaten zweispaltig (Bezeichnung | Wert), Cookies als 2×2-Raster (Beschreibung
+  über die volle Breite).
+- **Desktop:** vollständige Spaltentabelle mit gemeinsamer Kopfzeile.
+
+Das Overlay ist ein ARIA-Dialog (Fokusfalle, `Escape` schließt, Fokusrückgabe an den Auslöser).
+
+![Cookie-Informationsfenster – Desktop](Images/10-frontend-cookie-info.png)
+
+*Abb.: Cookie-Informationsfenster auf dem Desktop – Dienst-Metadaten oben, darunter die
+Cookie-Tabelle unter der Überschrift „Cookies".*
+
+![Cookie-Informationsfenster – Tablet](Images/12-frontend-cookie-info-tablet.png)
+
+![Cookie-Informationsfenster – Smartphone](Images/11-frontend-cookie-info-mobile.png)
+
+> Die Spaltenüberschriften und Metadaten-Bezeichnungen sind über die Banner-Textfelder bzw. die
+> Sprachdateien (`locallang.xlf`/`de.locallang.xlf`) anpassbar.
+
 ---
 
 ## 4. Verwendung im Backend
@@ -277,6 +306,61 @@ Wichtige Felder je Typ:
   - **Bildschirm:** Bearbeitungsformular einer Component, Tab *JavaScripts*.
   - **Sichtbar sein muss:** die Felder für das bei Einwilligung zu injizierende Snippet
     (`accepted_script`) und das Aufräum-Snippet bei Widerruf (`rejected_script`).
+
+### 4.3.1 Cookie-Informationen pro Dienst (Service-Suche)
+
+Jede Component hat einen Tab **Cookie-Informationen**. Hier werden die Angaben gepflegt, die im
+Frontend im Cookie-Informationsfenster erscheinen: die Dienst-Metadaten (Anbieter, Domains,
+erhobene Daten, Datenschutz-Link) sowie die Liste der einzelnen Cookies.
+
+Zum schnellen Ausfüllen gibt es das Feld **Service** (Dienst-Suche). Tippt man einen bekannten
+Dienstnamen (z. B. „YouTube", „Google Analytics", „Matomo") ein, erscheint direkt unter dem Feld
+eine Vorschlagsliste aus einer mitgelieferten Dienst-Datenbank (`Resources/Public/cookie_database.json`).
+Durchsucht werden Name, Kennung und Aliasse des Dienstes (tolerant gegenüber Groß-/Kleinschreibung
+und Teilstrings).
+
+**Screenshot 10 – Component: Cookie-Informationen, Dienst-Suche**
+`Documentation/Images/15-component-cookie-search.png`
+
+- **Bildschirm:** Component-Formular, Tab *Cookie-Informationen*, Feld *Service* mit offener
+  Vorschlagsliste.
+- **Sichtbar sein muss:** das Eingabefeld *Service* und darunter die Vorschlagsliste (Dienstname
+  + Anbieter · Cookie-Anzahl).
+
+![Cookie-Informationen – Dienst-Suche mit Autocomplete](Images/15-component-cookie-search.png)
+
+*Abb. 10: Die Dienst-Suche im Tab „Cookie-Informationen". Beim Tippen erscheint eine
+Vorschlagsliste aus der mitgelieferten Dienst-Datenbank.*
+
+Beim Klick auf einen Vorschlag werden automatisch befüllt:
+
+- der **Service**-Name (bleibt als Feldwert gespeichert),
+- **Provider domains**, **Publisher**, **Privacy policy link**, **Data collected**,
+- für **jeden** Cookie des Dienstes eine neue Inline-Zeile in der Cookie-Liste
+  (Name, Typ, Zweck, Laufzeit, Beschreibung).
+
+**Screenshot 11 – Component: Cookie-Informationen, ausgefüllt**
+`Documentation/Images/16-component-cookie-information.png`
+
+- **Bildschirm:** Tab *Cookie-Informationen* mit befüllten Dienst-Feldern und Cookie-Liste.
+
+![Cookie-Informationen – ausgefüllter Tab](Images/16-component-cookie-information.png)
+
+*Abb. 11: Nach Auswahl eines Dienstes sind die Metadaten-Felder und die Cookie-Liste befüllt –
+alles bleibt frei bearbeitbar.*
+
+Wichtige Hinweise:
+
+- **Nur Ausfüllhilfe:** Alle Felder und Cookie-Zeilen bleiben danach frei bearbeit-, ergänz- und
+  löschbar. Es werden reguläre TYPO3-Datensätze angelegt – keine Laufzeit-Referenz auf die JSON.
+- **Erst beim Speichern persistiert:** Die neuen Cookie-Zeilen sind zunächst nur ungespeicherte
+  Formularzeilen (wie bei „Neuen Datensatz erstellen"). Wird ohne Speichern abgebrochen, bleibt
+  nichts zurück.
+- **Sprachabhängig:** Übernommen wird jeweils der zur **aktuell bearbeiteten Sprache** des
+  Datensatzes passende Text (de/en; Fallback en → de). Beim Bearbeiten der englischen Übersetzung
+  werden die englischen Texte übernommen, bei der deutschen die deutschen.
+- **Mehrere Dienste gleichzeitig:** Sind mehrere Components zugleich aufgeklappt, wird die
+  Cookie-Liste immer der Component zugeordnet, in deren Suchfeld ausgewählt wurde.
 
 ### 4.4 Tracking / Consent Mode auf Banner-Ebene
 
@@ -460,7 +544,7 @@ removed." ersetzt (keine Zustimmung möglich, kein externer Inhalt geladen).*
 
 ## 7. Screenshots und visuelle Anleitungen
 
-Alle Screenshots liegen unter `Documentation/Images/`. Die Aufnahmen 1–9 sind vorhanden und
+Alle Screenshots liegen unter `Documentation/Images/`. Die unten gelisteten Aufnahmen sind vorhanden und
 in den Abschnitten oben eingebunden. Erfinde keine UI-Elemente – nimm nur real vorhandene
 Ansichten auf. Die konkreten Texte/Farben stammen aus Banner-Datensatz und
 `[SITEPACKAGE_ODER_TEMPLATE]` und können in deiner Installation abweichen.
@@ -476,6 +560,11 @@ Ansichten auf. Die konkreten Texte/Farben stammen aus Banner-Datensatz und
 | 7 | `Images/07-frontend-placeholder.png` | Frontend, gegateter Inhalt ohne Einwilligung | Platzhalter mit Titel und Einwilligungs-Umschalter | vorhanden (Abschnitt 5.3) |
 | 8 | `Images/08-html-removed.png` | Frontend, HTML-Element mit externem iFrame | Generischer Platzhalter „Third-party HTML has been removed." ohne Umschalter | vorhanden (Abschnitt 6.2) |
 | 9 | `Images/09-consent-log.png` | Modul **Consent Banners**, Ansicht *Consent-Protokoll* | Tabelle mit Einträgen, Suchfeld, Reload-Button | vorhanden (Abschnitt 4.6) |
+| 10 | `Images/10-frontend-cookie-info.png` | Frontend, Cookie-Informationsfenster (Desktop) | Dienst-Metadaten + Cookie-Tabelle unter „Cookies" | vorhanden (Abschnitt 3.7) |
+| 11 | `Images/11-frontend-cookie-info-mobile.png` | Frontend, Cookie-Informationsfenster (Smartphone) | gestapelte Karten, farbige Feldbezeichnungen | vorhanden (Abschnitt 3.7) |
+| 12 | `Images/12-frontend-cookie-info-tablet.png` | Frontend, Cookie-Informationsfenster (Tablet) | Metadaten zweispaltig, Cookies als 2×2-Raster | vorhanden (Abschnitt 3.7) |
+| 15 | `Images/15-component-cookie-search.png` | Component-Formular, Tab *Cookie-Informationen* | Feld *Service* mit offener Autocomplete-Vorschlagsliste | vorhanden (Abschnitt 4.3.1) |
+| 16 | `Images/16-component-cookie-information.png` | Component-Formular, Tab *Cookie-Informationen* | befüllte Dienst-Felder + Cookie-Liste | vorhanden (Abschnitt 4.3.1) |
 | — | `Images/[10-devtools-cookie].png` | Browser-DevTools → *Application/Storage → Cookies* | Cookie **`BbConsentPreferences`** mit `{component_id: true/false}` | optional, manuell (siehe unten) |
 
 **Zum Cookie (Aufnahme 10, manuell):** Ein DevTools-Screenshot lässt sich nicht automatisiert

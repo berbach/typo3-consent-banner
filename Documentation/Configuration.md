@@ -124,6 +124,32 @@ Im Tab **JavaScripts** werden die Snippets hinterlegt:
 - **rejected_script** – wird bei Widerruf ausgeführt (Cleanup, z. B. Cookies
   löschen), das injizierte Script wird entfernt.
 
+### 4.5 Cookie-Informationen (Dienst-Suche & Cookies)
+
+Jede Component hat den Tab **Cookie-Informationen** mit den Dienst-Metadaten und der Cookie-Liste,
+die im Frontend im Cookie-Informationsfenster angezeigt werden.
+
+Das Feld **Service** bietet eine Autocomplete-Suche gegen die mitgelieferte Dienst-Datenbank
+`Resources/Public/cookie_database.json` (durchsucht: Name, Kennung, Aliasse). Ein Klick auf einen
+Vorschlag befüllt automatisch *Provider domains*, *Publisher*, *Privacy policy link*,
+*Data collected* sowie – je Cookie des Dienstes – eine Inline-Zeile (Name, Typ, Zweck, Laufzeit,
+Beschreibung).
+
+![Cookie-Informationen – Dienst-Suche](Images/15-component-cookie-search.png)
+
+![Cookie-Informationen – ausgefüllt](Images/16-component-cookie-information.png)
+
+- **Nur Ausfüllhilfe:** Alle Werte bleiben editierbar; es entstehen reguläre TYPO3-Datensätze
+  (keine Laufzeit-Referenz auf die JSON). Die Cookie-Zeilen werden erst beim **Speichern** der
+  Component persistiert.
+- **Sprache:** Übernommen wird der zur bearbeiteten Datensatz-Sprache passende Text (de/en,
+  Fallback en → de).
+- **Dienst-Datenbank erweitern:** Weitere Dienste lassen sich in `cookie_database.json` unter dem
+  Schlüssel `services` ergänzen. Felder je Dienst: `service_name`, `service_identifier`,
+  `service_aliases` (Array), `service_provider`, `service_publisher`, `service_privacy_link`,
+  `service_data_collected` (`{de, en}`) und `cookies[]` mit `name`, `type` sowie
+  `lifetime`/`purpose`/`description` (jeweils `{de, en}`).
+
 ---
 
 ## 5. Tracking / Consent Mode (Banner-Ebene)
@@ -167,6 +193,16 @@ Die Extension erzeugt daraus früh im `<head>` (vor den Tags):
 Der Consent wird gespeichert in:
 - **Cookie** `BbConsentPreferences` = `{ "<component_id>": true|false }`
 - **localStorage** (reichhaltiger: Hash, Version, Timestamp, Services)
+
+### 6.1 Cookie-Informationsfenster
+
+Über „Cookie-Informationen anzeigen" öffnet sich ein responsives Overlay mit allen Diensten
+(nach Gruppe/Dienst gegliedert). Je Dienst werden die Metadaten (Anbieter, Domains, erhobene
+Daten, Datenschutz-Link) angezeigt, darunter unter der Überschrift **„Cookies"** eine Tabelle mit
+den Spalten *Name, Type, Purpose, Lifetime, Description*. Das Layout ist responsiv (Smartphone
+gestapelt, Tablet 2×2-Raster, Desktop volle Tabelle).
+
+![Cookie-Informationsfenster (Desktop)](Images/10-frontend-cookie-info.png)
 
 ---
 

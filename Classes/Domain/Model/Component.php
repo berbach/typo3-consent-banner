@@ -81,11 +81,41 @@ class Component extends AbstractEntity
      */
     protected string $placeholderDescription = '';
     /**
+     * name of the selected service (autocomplete against cookie_database.json)
+     *
+     * @var string
+     */
+    protected string $serviceName = '';
+    /**
+     * comma-separated provider domains of the service
+     *
+     * @var string
+     */
+    protected string $serviceProvider = '';
+    /**
+     * privacy policy link of the service
+     *
+     * @var string
+     */
+    protected string $servicePrivacyLink = '';
+    /**
+     * publisher / legal entity of the service
+     *
+     * @var string
+     */
+    protected string $servicePublisher = '';
+    /**
+     * description of the data collected by the service (current language)
+     *
+     * @var string
+     */
+    protected string $serviceDataCollected = '';
+    /**
      * cookies belonging to this component (inline children)
      *
      * @var ObjectStorage<Cookie>
      */
-    protected ObjectStorage $cookies;
+    protected ObjectStorage $serviceCookies;
 
     /**
      * show uri
@@ -110,7 +140,7 @@ class Component extends AbstractEntity
      */
     public function __construct() {
         //Do not remove the next line: It would break the functionality
-        $this->cookies = new ObjectStorage();
+        $this->serviceCookies = new ObjectStorage();
     }
 
     /**
@@ -372,29 +402,81 @@ class Component extends AbstractEntity
         $this->consentModeSignals = $consentModeSignals;
     }
 
+    public function getServiceName(): string
+    {
+        return $this->serviceName;
+    }
+
+    public function setServiceName(string $serviceName): void
+    {
+        $this->serviceName = $serviceName;
+    }
+
+    public function getServiceProvider(): string
+    {
+        return $this->serviceProvider;
+    }
+
+    public function setServiceProvider(string $serviceProvider): void
+    {
+        $this->serviceProvider = $serviceProvider;
+    }
+
+    public function getServicePrivacyLink(): string
+    {
+        return $this->servicePrivacyLink;
+    }
+
+    public function setServicePrivacyLink(string $servicePrivacyLink): void
+    {
+        $this->servicePrivacyLink = $servicePrivacyLink;
+    }
+
+    public function getServicePublisher(): string
+    {
+        return $this->servicePublisher;
+    }
+
+    public function setServicePublisher(string $servicePublisher): void
+    {
+        $this->servicePublisher = $servicePublisher;
+    }
+
+    public function getServiceDataCollected(): string
+    {
+        return $this->serviceDataCollected;
+    }
+
+    public function setServiceDataCollected(string $serviceDataCollected): void
+    {
+        $this->serviceDataCollected = $serviceDataCollected;
+    }
+
     /**
      * @return ObjectStorage<Cookie>
      */
-    public function getCookies(): ObjectStorage
+    public function getServiceCookies(): ObjectStorage
     {
-        return $this->cookies;
+        // Extbase reconstitutes objects without invoking the constructor; guard
+        // against the typed property being accessed before initialization.
+        return $this->serviceCookies ??= new ObjectStorage();
     }
 
     /**
-     * @param ObjectStorage<Cookie> $cookies
+     * @param ObjectStorage<Cookie> $serviceCookies
      */
-    public function setCookies(ObjectStorage $cookies): void
+    public function setServiceCookies(ObjectStorage $serviceCookies): void
     {
-        $this->cookies = $cookies;
+        $this->serviceCookies = $serviceCookies;
     }
 
-    public function addCookie(Cookie $cookie): void
+    public function addServiceCookie(Cookie $cookie): void
     {
-        $this->cookies->attach($cookie);
+        $this->serviceCookies->attach($cookie);
     }
 
-    public function removeCookie(Cookie $cookie): void
+    public function removeServiceCookie(Cookie $cookie): void
     {
-        $this->cookies->detach($cookie);
+        $this->serviceCookies->detach($cookie);
     }
 }

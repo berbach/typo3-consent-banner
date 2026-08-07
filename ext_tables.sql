@@ -101,6 +101,15 @@ CREATE TABLE tx_consentbanner_domain_model_consent_components
     integration_type            varchar(30)          DEFAULT 'iframe' NOT NULL,
     consent_mode_signals        varchar(255)         DEFAULT ''  NOT NULL,
 
+    service_name                varchar(255)         DEFAULT ''  NOT NULL,
+    service_provider            varchar(255)         DEFAULT ''  NOT NULL,
+    service_privacy_link        varchar(1024)        DEFAULT ''  NOT NULL,
+    service_publisher           varchar(255)         DEFAULT ''  NOT NULL,
+    service_data_collected      text,
+    -- child count of the inline cookies relation; required so Extbase's
+    -- DataMapper thaws the HAS_MANY relation (it skips columns absent from the row).
+    service_cookies             int(11) unsigned     DEFAULT '0' NOT NULL,
+
     placeholder_title           varchar(255),
     placeholder_description     text,
 
@@ -121,7 +130,7 @@ CREATE TABLE tx_consentbanner_domain_model_consent_components
 CREATE TABLE tx_consentbanner_domain_model_cookie
 (
     cookie_name                 varchar(255)         DEFAULT '' NOT NULL,
-    cookie_provider             varchar(255)         DEFAULT '' NOT NULL,
+    cookie_type                 varchar(60)          DEFAULT '' NOT NULL,
     cookie_description          text,
     cookie_purpose              text,
     cookie_lifetime             varchar(255)         DEFAULT '' NOT NULL,

@@ -88,7 +88,14 @@ class ConsentBannerProcessor implements DataProcessorInterface
                         'provider'      => !empty($banner->getCookieProviderText()) ? $banner->getCookieProviderText() : $this->getTranslate('cookie_provider_text'),
                         'purpose'       => !empty($banner->getCookiePurposeText()) ? $banner->getCookiePurposeText() : $this->getTranslate('cookie_purpose_text'),
                         'description'   => !empty($banner->getCookieDescriptionText()) ? $banner->getCookieDescriptionText() : $this->getTranslate('cookie_description_text'),
-                    ]
+                    ],
+                    'cookieTableHeading' => $this->getTranslate('cookie_table_heading'),
+                    'serviceMeta' => [
+                        'publisher'     => $this->getTranslate('meta_publisher_label'),
+                        'provider'      => $this->getTranslate('meta_provider_label'),
+                        'dataCollected' => $this->getTranslate('meta_data_collected_label'),
+                        'privacy'       => $this->getTranslate('meta_privacy_label'),
+                    ],
 
                 ],
                 'openerVariant'         => $banner->getPrivacySettingsVariant(), //10 Text link | 20 Button Widget
@@ -195,6 +202,13 @@ class ConsentBannerProcessor implements DataProcessorInterface
                     'signals' => $component->getConsentModeSignals(),
                     'acceptedScript' => $component->getAcceptedScript(),
                     'rejectedScript' => $component->getRejectedScript(),
+                    'service' => [
+                        'name' => $component->getServiceName(),
+                        'provider' => $component->getServiceProvider(),
+                        'privacyLink' => $component->getServicePrivacyLink(),
+                        'publisher' => $component->getServicePublisher(),
+                        'dataCollected' => $component->getServiceDataCollected(),
+                    ],
                     'cookies' => $this->addCookies($component)
                 ];
                 $counter->increment();
@@ -207,15 +221,15 @@ class ConsentBannerProcessor implements DataProcessorInterface
     /**
      * Collects the cookies of a component as a plain array for the frontend.
      *
-     * @return array<int, array{name: string, provider: string, purpose: string, lifetime: string, description: string}>
+     * @return array<int, array{name: string, type: string, purpose: string, lifetime: string, description: string}>
      */
     protected function addCookies(object $component): array
     {
         $cookies = [];
-        foreach ($component->getCookies() as $cookie) {
+        foreach ($component->getServiceCookies() as $cookie) {
             $cookies[] = [
                 'name' => $cookie->getCookieName(),
-                'provider' => $cookie->getCookieProvider(),
+                'type' => $cookie->getCookieType(),
                 'purpose' => $cookie->getCookiePurpose(),
                 'lifetime' => $cookie->getCookieLifetime(),
                 'description' => $cookie->getCookieDescription(),

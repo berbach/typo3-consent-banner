@@ -97,13 +97,20 @@ class CookieInformation {
     buildCookieContent() {
         const esc = (s) => this.escape(s);
         const labels = this.data?.displayTexts?.cookie || {};
+        const cookiesHeading = this.data?.displayTexts?.cookieTableHeading || 'Cookies';
         const groups = this.data?.groups || {};
+        // Column headers without a redundant "Cookie " prefix – a single
+        // "Cookies" heading is shown above the table instead.
+        const short = (l) => {
+            const s = String(l ?? '').replace(/^\s*cookie[\s\-–_]*/i, '').trim();
+            return s ? s.charAt(0).toUpperCase() + s.slice(1) : String(l ?? '');
+        };
         const cols = [
-            ['name', labels.name || 'Cookie'],
-            ['provider', labels.provider || 'Provider'],
-            ['purpose', labels.purpose || 'Purpose'],
-            ['lifetime', labels.lifetime || 'Lifetime'],
-            ['description', labels.description || 'Description'],
+            ['name', short(labels.name || 'Name')],
+            ['type', short(labels.type || 'Type')],
+            ['purpose', short(labels.purpose || 'Purpose')],
+            ['lifetime', short(labels.lifetime || 'Lifetime')],
+            ['description', short(labels.description || 'Description')],
         ];
 
         let html = '';
@@ -119,6 +126,8 @@ class CookieInformation {
                 const serviceTitle = esc(service?.title);
                 html += `<div class="${CB_PREFIX}cookie-info-service">`;
                 html += `<h4 class="${CB_PREFIX}cookie-info-service-title">${serviceTitle}</h4>`;
+                html += this.buildServiceMeta(service?.service);
+                html += `<h5 class="${CB_PREFIX}cookie-info-cookies-title">${esc(cookiesHeading)}</h5>`;
                 html += `<div class="${CB_PREFIX}cookie-info-table" role="table" aria-label="${serviceTitle}">`;
                 html += `<div class="${CB_PREFIX}cookie-info-row ${CB_PREFIX}cookie-info-row--head" role="row">`;
                 cols.forEach(([, label]) => {
@@ -138,6 +147,49 @@ class CookieInformation {
         });
 
         return html || `<p class="${CB_PREFIX}cookie-info-empty">${esc(this.data?.displayTexts?.cookie?.description || 'No cookie details available.')}</p>`;
+    }
+
+    /**
+     * Renders the service-level meta information (provider, publisher, data
+     * collected and privacy link) below the service title. Only non-empty
+     * values are shown.
+     *
+     * @param {{provider?: string, publisher?: string, dataCollected?: string, privacyLink?: string}} [service]
+     * @return {string}
+     */
+    buildServiceMeta(service) {
+        if (!service || typeof service !== 'object') {
+            return '';
+        }
+        const esc = (s) => this.escape(s);
+        const metaLabels = this.data?.displayTexts?.serviceMeta || {};
+        const rows = [];
+        const add = (label, valueHtml) => rows.push(
+            `<div class="${CB_PREFIX}cookie-info-meta-row">`
+            + `<dt class="${CB_PREFIX}cookie-info-meta-label">${esc(label)}</dt>`
+            + `<dd class="${CB_PREFIX}cookie-info-meta-value">${valueHtml}</dd>`
+            + `</div>`
+        );
+        if (service.publisher) {
+            add(metaLabels.publisher || 'Publisher', esc(service.publisher));
+        }
+        if (service.provider) {
+            add(metaLabels.provider || 'Domains', esc(service.provider));
+        }
+        if (service.dataCollected) {
+            add(metaLabels.dataCollected || 'Data collected', esc(service.dataCollected));
+        }
+        if (service.privacyLink) {
+            const href = esc(service.privacyLink);
+            add(
+                metaLabels.privacy || 'Privacy policy',
+                `<a class="${CB_PREFIX}cookie-info-meta-link" href="${href}" target="_blank" rel="noopener noreferrer">${href}</a>`
+            );
+        }
+        if (rows.length === 0) {
+            return '';
+        }
+        return `<dl class="${CB_PREFIX}cookie-info-meta">${rows.join('')}</dl>`;
     }
 
     attachEventListeners() {
