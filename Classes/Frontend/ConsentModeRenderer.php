@@ -9,6 +9,7 @@ use Bb\ConsentBanner\Utility\CookieUtility;
 use Doctrine\DBAL\Exception;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
+use TYPO3\CMS\Core\Attribute\AsAllowedCallable;
 use TYPO3\CMS\Core\Core\RequestId;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -43,6 +44,14 @@ class ConsentModeRenderer
         'security_storage' => 'granted',
     ];
 
+    /**
+     * TYPO3 14 laesst als userFunc nur noch Methoden zu, die dieses Attribut
+     * tragen (AllowedCallableAssertion); ohne es endet jeder Seitenaufruf mit
+     * einer AllowedCallableException. Unter TYPO3 13 gibt es die
+     * Attribut-Klasse nicht - das schadet nicht, denn Attribute werden erst
+     * beim Auslesen per Reflection aufgeloest, und dort liest sie niemand aus.
+     */
+    #[AsAllowedCallable]
     public function render(string $content, array $conf, ?ServerRequestInterface $request = null): string
     {
         $site = $request?->getAttribute('site');
