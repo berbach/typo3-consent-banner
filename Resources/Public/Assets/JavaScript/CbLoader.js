@@ -53,6 +53,10 @@ const CbManager = function ()  {
         }
 
         this.attachPlaceholderToggles()
+        // Reveal what a returning visitor has already accepted. Without this the
+        // placeholder stayed in place until the next consent was saved, so a
+        // reload showed the block again instead of the content.
+        this.handlePlaceholderElements()
         // Apply tracking integrations for returning visitors (from the cookie).
         this.applyIntegrations()
     }
