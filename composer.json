@@ -1,6 +1,6 @@
 {
     "name": "bb/consent_banner",
-    "description": "Consent Banner Extension with Consent Mode, Consent history, Javascript.",
+    "description": "Consent Banner - Consent Banner Extension with Consent Mode, Consent history, Javascript.",
     "homepage": "https://berbach.com/",
     "license": "GPL-2.0-or-later",
     "type": "typo3-cms-extension",
