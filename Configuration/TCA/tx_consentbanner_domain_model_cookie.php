@@ -1,7 +1,16 @@
 <?php
 
+use TYPO3\CMS\Core\Information\Typo3Version;
+
 $ll = 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:';
 $llCore = 'LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:';
+
+// TYPO3 14 erwartet valuePicker-Items als ['label' => …, 'value' => …] (das alte Format ist deprecated),
+// TYPO3 13 liest sie nur positional als [label, value].
+$cookieTypes = ['Cookie', 'Session-Cookie', 'LocalStorage', 'SessionStorage', 'IndexedDB'];
+$cookieTypeItems = (new Typo3Version())->getMajorVersion() >= 14
+    ? array_map(static fn (string $type): array => ['label' => $type, 'value' => $type], $cookieTypes)
+    : array_map(static fn (string $type): array => [$type, $type], $cookieTypes);
 
 return [
     'ctrl' => [
@@ -103,13 +112,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'valuePicker' => [
-                    'items' => [
-                        ['Cookie', 'Cookie'],
-                        ['Session-Cookie', 'Session-Cookie'],
-                        ['LocalStorage', 'LocalStorage'],
-                        ['SessionStorage', 'SessionStorage'],
-                        ['IndexedDB', 'IndexedDB'],
-                    ],
+                    'items' => $cookieTypeItems,
                 ],
             ],
         ],

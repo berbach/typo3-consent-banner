@@ -12,7 +12,6 @@ return [
         'adminOnly' => true,
         'versioningWS' => false,
         'hideAtCopy' => true,
-        'searchFields' => '',
         'typeicon_classes' => [
             'default' => 'module-cookie'
         ],
