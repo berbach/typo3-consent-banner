@@ -325,6 +325,18 @@ $max-width: $container-max-width !default;
             display: none;
         }
     }
+
+    // Compact overlay: only text and buttons until "advanced settings" expands it.
+    &.#{variables.$prefix}cb-compact {
+        #{$self}-preferences,
+        .#{variables.$prefix}show-overlay {
+            display: none;
+        }
+
+        .#{variables.$prefix}show-compact {
+            display: block;
+        }
+    }
     //&-components{
     //    &-hidden{
     //        display: none;

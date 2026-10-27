@@ -47,7 +47,10 @@ das Site-Menü). Über das Stift-Symbol wird der Banner bearbeitet.
 - **Text for labels** – Button- und Cookie-Info-Texte (Fallback: Sprachdatei).
 - **Essential consent group** – die immer aktive Gruppe *technisch notwendig*.
 - **Other consent groups** – weitere, abwählbare Gruppen mit ihren Components.
-- **Banner setting** – Layout, Opener (Textlink/Button), Lifetimes.
+- **Banner setting** – Layout (`cb-bottom`, `cb-overlay`, `cb-overlay-compact`),
+  Opener (Textlink/Button), Lifetimes. `cb-overlay-compact` zeigt zuerst nur Text und
+  Buttons (inkl. *Ablehnen* = nur essenzielle Dienste) und klappt die Einstellungen
+  über „Erweiterte Einstellungen“ auf.
 - **Tracking / Consent Mode** – GTM- und Matomo-Konfiguration (siehe unten).
 
 ---

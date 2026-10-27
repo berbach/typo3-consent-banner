@@ -265,7 +265,13 @@ Schritte:
 1. **Banner**-Tab: Titel und Beschreibung pflegen.
 2. **Banner setting**-Tab: Layout und Opener (Textlink oder Button-Widget) sowie die
    **Lifetimes** (Ablauf für erneutes Nachfragen bzw. für die gespeicherte Einwilligung)
-   festlegen.
+   festlegen. Zur Wahl stehen drei Layouts:
+   - **Unten, volle Breite** – kompakte Leiste, „Erweiterte Einstellungen“ öffnet das Overlay.
+   - **Overlay** – mittiges Fenster, das sofort alle Gruppen und Dienste zeigt.
+   - **Overlay (kompakt)** – mittiges Fenster mit Text und den Buttons *Ablehnen*,
+     *Erweiterte Einstellungen* und *Alle akzeptieren*; die Gruppen erscheinen erst nach
+     Klick auf „Erweiterte Einstellungen“. *Ablehnen* speichert nur die technisch
+     notwendigen Dienste, der Text kommt aus dem Feld „Accept essential“.
 3. **Essential/Other consent groups**: Gruppen und die zugehörigen Components pflegen
    (siehe 4.3).
 4. Speichern.

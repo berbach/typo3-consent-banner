@@ -22,6 +22,8 @@ const CbManager = function ()  {
     this.bannerPreferences = JSON.parse(document.getElementById('bbBannerData').innerHTML)
 
     this.isBottomLayout = !typeofIsAndValueIsNot(this.bannerPreferences?.layout, 'string', 'cb-bottom');
+    // Compact overlay: starts as a small dialog (text + buttons) and expands to the settings on demand.
+    this.isCompactOverlay = this.bannerPreferences?.layout === 'cb-overlay-compact';
 
     this.cookiePreferences = JSON.parse(cookieUtils.get(LAST_PREFERENCES_NAME));
     this.localPreferences = {}
@@ -32,6 +34,7 @@ const CbManager = function ()  {
     this.saveAndCloseButton = null
     this.confirmSelectionButton = null
     this.advancedSettingsButton = null
+    this.rejectButton = null
     this.showCookieInfoButton = null
 
     this.banner = null
@@ -74,6 +77,9 @@ const CbManager = function ()  {
         })
         this.confirmSelectionButton?.addEventListener('click', () => {
             this.savePreferences(this.collectData())
+        })
+        this.rejectButton?.addEventListener('click', () => {
+            this.savePreferences(this.collectEssentialData())
         })
         this.advancedSettingsButton?.addEventListener('click', () => {
             this.createBannerOverlay()
@@ -197,8 +203,15 @@ const CbManager = function ()  {
         // Remember who opened the banner so focus can return there on close.
         this.bannerOpener = document.activeElement;
 
+        let layoutClass = `bb-${this.bannerPreferences?.layout ?? 'cb-bottom'}`
+        if (isOverlay) {
+            layoutClass = 'bb-cb-overlay'
+        } else if (this.isCompactOverlay) {
+            layoutClass = 'bb-cb-overlay bb-cb-compact'
+        }
+
         this.banner = createElementWithAttrs('div', {
-            className: [CB_NAME, isOverlay ? 'bb-cb-overlay' : `bb-${this.bannerPreferences?.layout ?? 'cb-bottom'}`].join(" "),
+            className: [CB_NAME, layoutClass].join(" "),
             tabindex: "-1",
             role: "dialog",
             "aria-label": this.bannerPreferences?.banner?.title || 'Cookie consent',
@@ -300,7 +313,7 @@ const CbManager = function ()  {
 
     this.createBannerOverlay = () => {
 
-        this.banner.classList.remove("bb-cb-bottom", 'visible')
+        this.banner.classList.remove("bb-cb-bottom", 'bb-cb-compact', 'visible')
         this.banner.classList.add('bb-cb-overlay', 'visible')
         // Switched to the blocking overlay → now behaves as a modal dialog.
         this.banner.setAttribute('aria-modal', 'true')
@@ -373,11 +386,14 @@ const CbManager = function ()  {
 
         let buttonLabels = Object.keys(this.bannerPreferences?.displayTexts?.buttons).length > 0 ? this.bannerPreferences?.displayTexts?.buttons : {}
         const containerButtons = createElementWithAttrs('div', {className: [CB_PREFIX + 'buttons'].join(' ')})
-        /**
-         * @TODO
-         * acceptEssential Button einbauen
-         * close or X Button einbauen
-         */
+        if (this.isCompactOverlay) {
+            // Accepts only the locked (essential) components.
+            this.rejectButton = createElementWithAttrs('button', {
+                className: ['bb-button' , 'bb-btn--typeS', 'bb-btn--reject'].join(' '),
+                type: 'button',
+                innerText: buttonLabels?.acceptEssential
+            }, containerButtons)
+        }
         this.saveAndCloseButton = createElementWithAttrs('button', {
             className: ['bb-button' , 'bb-btn--typeS', 'bb-show-overlay'].join(' '),
             type: 'button',
@@ -394,10 +410,15 @@ const CbManager = function ()  {
             innerText: buttonLabels?.confirmSelection
         }, containerButtons)
         this.advancedSettingsButton = createElementWithAttrs('button', {
-            className: ['bb-button' , 'bb-btn--typeS', 'bb-show-bottom'].join(' '),
+            className: ['bb-button' , 'bb-btn--typeS', 'bb-show-bottom', 'bb-show-compact'].join(' '),
             type: 'button',
             innerText: buttonLabels?.advancedSettings
         }, containerButtons)
+
+        if (this.isCompactOverlay) {
+            // Compact overlay order: reject, advanced settings / save & close, accept all.
+            containerButtons.appendChild(this.acceptAllButton)
+        }
 
         this.attachBannerEventListeners(isOverlay);
         return containerButtons;
@@ -878,6 +899,20 @@ const CbManager = function ()  {
     this.collectAndModifyData = (value) => {
         const data = this.collectData()
         for (let key of Object.keys(data)) data[key].consent = value
+
+        return data
+    }
+    /**
+     * Consent for the locked (essential) components only, everything else is declined.
+     * @return {Object}
+     */
+    this.collectEssentialData = () => {
+        const data = this.collectData()
+        const formPreferencesContainer = this.bannerMain.querySelector(`.${CB_PREFIX}preferences`)
+        for (let key of Object.keys(data)) {
+            const input = formPreferencesContainer.querySelector(`.${CB_PREFIX}component input[name="${key}"]`)
+            data[key].consent = !!input?.disabled && !!input?.checked
+        }
 
         return data
     }

@@ -3,6 +3,10 @@
     <file source-language="en" target-language="de" datatype="plaintext" original="EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf" date="2021-07-29T16:10:22Z" product-name="consentbanners">
         <header/>
         <body>
+            <trans-unit id="field.banner_layout.overlayCompact" resname="field.banner_layout.overlayCompact">
+                <source>Compact overlay banner, positioned at the center (settings on demand, with reject button)</source>
+                <target>Kompaktes Overlay, mittig positioniert (Einstellungen auf Klick, mit Ablehnen-Button)</target>
+            </trans-unit>
             <trans-unit id="mlang_labels_tablabel" resname="mlang_labels_tablabel">
                 <source>Consent Banner</source>
                 <target>Zustimmungsbanner</target>

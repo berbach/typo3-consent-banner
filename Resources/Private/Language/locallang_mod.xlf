@@ -117,6 +117,9 @@
             <trans-unit id="field.banner_layout.overlay">
                 <source>Overlay banner, positioned at the center</source>
             </trans-unit>
+            <trans-unit id="field.banner_layout.overlayCompact">
+                <source>Compact overlay banner, positioned at the center (settings on demand, with reject button)</source>
+            </trans-unit>
             <trans-unit id="field.banner_layout.fullWidthBottom">
                 <source>Full-width banner, positioned at the bottom</source>
             </trans-unit>

@@ -325,6 +325,7 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.banner_layout.overlay', 'value' => 'cb-overlay'],
+                    ['label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.banner_layout.overlayCompact', 'value' => 'cb-overlay-compact'],
                     ['label' => 'LLL:EXT:consent_banner/Resources/Private/Language/locallang_mod.xlf:field.banner_layout.fullWidthBottom', 'value' => 'cb-bottom']
                 ],
                 'default' => 'cb-bottom',

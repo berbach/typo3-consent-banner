@@ -121,7 +121,7 @@ class ConsentBannerProcessor implements DataProcessorInterface
                     ],
                     $banner->getConsentOtherGroups()
                 ),
-                'layout'                => $banner->getBannerLayout(), // cb-bottom || cb-overlay
+                'layout'                => $banner->getBannerLayout(), // cb-bottom || cb-overlay || cb-overlay-compact
                 'lifetimes' => [
                     'banner'            => $banner->getLifetimeBanner(), // 14 || 21 || 28 Days
                     'userConsent'       => $banner->getLifetimeUserConsent() // 365 || 730 || 1095 Days
