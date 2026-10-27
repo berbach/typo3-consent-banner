@@ -11,7 +11,6 @@ return [
         'adminOnly' => true,
         'versioningWS' => false,
         'hideAtCopy' => true,
-        'searchFields' => '',
         'typeicon_classes' => [
             'default' => 'module-cookie'
         ],
@@ -270,6 +269,7 @@ return [
                 'renderType' => 'codeEditor',
                 'format' => 'javascript',
                 'eval' => 'trim',
+                'searchable' => false,
                 'cols' => 80,
                 'rows' => 20
             ]
@@ -283,6 +283,7 @@ return [
                 'renderType' => 'codeEditor',
                 'format' => 'javascript',
                 'eval' => 'trim',
+                'searchable' => false,
                 'cols' => 80,
                 'rows' => 20
             ]
