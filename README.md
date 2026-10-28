@@ -37,7 +37,7 @@ Freischaltung eingebetteter Inhalte **ohne Seiten-Reload**.
 | Komponente | Version |
 |-----------|---------|
 | TYPO3     | 13.4 – 14.3 |
-| PHP       | 8.3 – 8.4 |
+| PHP       | 8.3 – 8.5 |
 
 ---
 

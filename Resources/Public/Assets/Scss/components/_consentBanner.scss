@@ -326,6 +326,13 @@ $max-width: $container-max-width !default;
         }
     }
 
+    // Advanced settings of the compact overlay: only "save & close" and "accept all".
+    &.#{variables.$prefix}cb-overlay:not(.#{variables.$prefix}cb-compact) {
+        .#{variables.$prefix}btn--reject {
+            display: none;
+        }
+    }
+
     // Compact overlay: only text and buttons until "advanced settings" expands it.
     &.#{variables.$prefix}cb-compact {
         #{$self}-preferences,
@@ -846,6 +853,7 @@ $max-width: $container-max-width !default;
 //  - sticky header (with the X close button) pinned to the top
 //  - the body scrolls (see &-body rule above); preferences + footer scroll under
 //  - footer navigation links are hidden while the settings dialog is open
+//    (the compact overlay shows them until it expands to the settings)
 // -----------------------------------------------------------------------------
 .#{variables.$prefix}cb-overlay {
     // let the sticky header sit flush at the top of the scroll box
@@ -866,9 +874,14 @@ $max-width: $container-max-width !default;
         border-bottom: unit.bb-calc-rem(1) solid $gray95;
     }
 
-    .#{variables.$prefix}consentbanner-footer-cell--links {
+    &:not(.#{variables.$prefix}cb-compact) .#{variables.$prefix}consentbanner-footer-cell--links {
         display: none;
     }
+}
+
+// Overlay buttons stay on one line
+.#{variables.$prefix}consentbanner.#{variables.$prefix}cb-overlay .#{variables.$prefix}consentbanner-buttons .#{variables.$prefix}button {
+    white-space: nowrap;
 }
 
 // Sperrt das Scrollen der Seite, solange der Consent Banner offen/aktiv ist.

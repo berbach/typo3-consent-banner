@@ -49,8 +49,10 @@ das Site-Menü). Über das Stift-Symbol wird der Banner bearbeitet.
 - **Other consent groups** – weitere, abwählbare Gruppen mit ihren Components.
 - **Banner setting** – Layout (`cb-bottom`, `cb-overlay`, `cb-overlay-compact`),
   Opener (Textlink/Button), Lifetimes. `cb-overlay-compact` zeigt zuerst nur Text und
-  Buttons (inkl. *Ablehnen* = nur essenzielle Dienste) und klappt die Einstellungen
-  über „Erweiterte Einstellungen“ auf.
+  Buttons (inkl. *Accept essential* = nur essenzielle Dienste) und klappt die Einstellungen
+  über „Erweiterte Einstellungen“ auf. Das X schließt dort nie ohne Entscheidung: in der
+  kompakten Ansicht speichert es nur die essenziellen Dienste, in den Einstellungen die
+  aktuelle Auswahl (wie „Speichern & schließen“).
 - **Tracking / Consent Mode** – GTM- und Matomo-Konfiguration (siehe unten).
 
 ---

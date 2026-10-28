@@ -274,7 +274,7 @@ const CbManager = function ()  {
             type: 'button',
             'aria-label': this.bannerPreferences?.displayTexts?.buttons?.close || 'Close'
         }, bannerHeader)
-        this.closeButton.addEventListener('click', () => this.closeAndRemoveBanner())
+        this.closeButton.addEventListener('click', () => this.handleCloseButton())
 
         bannerContent.appendChild(bannerHeader)
         bannerContent.appendChild(this.createPreferences(isOverlay))
@@ -309,6 +309,23 @@ const CbManager = function ()  {
         document.documentElement.classList.add(CB_NAME + '--page-locked')
 
         this.focusBanner()
+    }
+
+    /**
+     * The compact overlay never closes without a decision: the X keeps the
+     * essential components in the compact view and saves the current selection
+     * in the advanced settings. Other layouts just close the banner.
+     */
+    this.handleCloseButton = () => {
+        if (!this.isCompactOverlay) {
+            this.closeAndRemoveBanner()
+            return
+        }
+        if (this.banner?.classList.contains('bb-cb-compact')) {
+            this.savePreferences(this.collectEssentialData())
+        } else {
+            this.savePreferences(this.collectData())
+        }
     }
 
     this.createBannerOverlay = () => {

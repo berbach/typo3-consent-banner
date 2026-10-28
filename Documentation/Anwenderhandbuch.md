@@ -32,7 +32,7 @@ sicheren Umgang mit eigenen Content-Elementen und dem TYPO3-Content-Element **�
 | Komponente | Anforderung |
 |-----------|-------------|
 | TYPO3 CMS | 13.4 – 14.3 |
-| PHP | 8.3 – 8.4 |
+| PHP | 8.3 – 8.5 |
 | Composer | für Installation erforderlich |
 
 > **Versionsabhängig:** Bei anderen TYPO3-/PHP-Versionen als oben kann das Verhalten
@@ -268,10 +268,14 @@ Schritte:
    festlegen. Zur Wahl stehen drei Layouts:
    - **Unten, volle Breite** – kompakte Leiste, „Erweiterte Einstellungen“ öffnet das Overlay.
    - **Overlay** – mittiges Fenster, das sofort alle Gruppen und Dienste zeigt.
-   - **Overlay (kompakt)** – mittiges Fenster mit Text und den Buttons *Ablehnen*,
-     *Erweiterte Einstellungen* und *Alle akzeptieren*; die Gruppen erscheinen erst nach
-     Klick auf „Erweiterte Einstellungen“. *Ablehnen* speichert nur die technisch
-     notwendigen Dienste, der Text kommt aus dem Feld „Accept essential“.
+   - **Overlay (kompakt)** – mittiges Fenster mit Text, Footer-Links und den Buttons
+     *Nur Essenzielle akzeptieren*, *Erweiterte Einstellungen* und *Alle akzeptieren*;
+     die Gruppen erscheinen erst nach Klick auf „Erweiterte Einstellungen“. Der erste
+     Button speichert nur die technisch notwendigen Dienste, sein Text kommt aus dem Feld
+     „Accept essential“. Das X speichert ebenfalls nur die notwendigen Dienste.
+     In den erweiterten Einstellungen stehen nur *Speichern & schließen* und
+     *Alle akzeptieren*, die Footer-Links sind ausgeblendet und das X speichert wie
+     *Speichern & schließen* die aktuelle Auswahl.
 3. **Essential/Other consent groups**: Gruppen und die zugehörigen Components pflegen
    (siehe 4.3).
 4. Speichern.
@@ -726,5 +730,5 @@ Skripte benötigen eine **Domain-Freigabe** in der CSP (z. B. `googletagmanager.
 
 ---
 
-*Grundlage: Consent Banner 1.3.7 (`bb/consent_banner`), TYPO3 13.4–14.3, PHP 8.3–8.4.
+*Grundlage: Consent Banner 1.5.0 (`bb/consent_banner`), TYPO3 13.4–14.3, PHP 8.3–8.5.
 Ergänzende technische Referenz: `Documentation/Configuration.md`.*
