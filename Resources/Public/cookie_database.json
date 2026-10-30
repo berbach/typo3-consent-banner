@@ -1034,7 +1034,10 @@
 			},
 			"cookies": [
 				{
-					"name": "(keine im Normalbetrieb)",
+					"name": {
+						"de": "(keine im Normalbetrieb)",
+						"en": "(none in normal operation)"
+					},
 					"type": "-",
 					"lifetime": {
 						"de": "-",
@@ -1190,7 +1193,10 @@
 			},
 			"cookies": [
 				{
-					"name": "(keine im Standardbetrieb)",
+					"name": {
+						"de": "(keine im Standardbetrieb)",
+						"en": "(none by default)"
+					},
 					"type": "-",
 					"lifetime": {
 						"de": "-",
